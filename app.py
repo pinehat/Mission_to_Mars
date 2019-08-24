@@ -25,9 +25,9 @@ def scrape():
     mongo.db.mars_coll.update({}, mars_dict, upsert=True)
     
     #return redirect("http://localhost:5000/", code=302)
-    #return redirect("/", code=302)
+    return redirect("/", code=302)
     
-    return "Scraping was successful."
+    #return "Scraping was successful."
 
 if __name__ == "__main__":
     #print (scrape_mars.scrape())

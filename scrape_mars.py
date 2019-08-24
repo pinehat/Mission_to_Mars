@@ -126,8 +126,8 @@ def get_hemispheres(browser):
     
         # Get title and cut off 'enhanced' from end
         title = hemisphere.find('div', class_='description').find('a', class_='itemLink product-item').h3.text
-        hemisphere_title = str(title.split()[0:-1])
-  
+        if title.endswith(' Enhanced'):
+            title = title[:-9]  
         # Construct each hemisphere image URL
         url = 'https://astrogeology.usgs.gov'
         full_url = url + hemisphere.find('a',class_='itemLink product-item')['href']    
@@ -138,7 +138,7 @@ def get_hemispheres(browser):
         image_soup = BeautifulSoup(usgs_html,'html.parser')
         image_url = image_soup.find('div',class_='downloads').a['href']
     
-        hemisphere_dict = {"title" : hemisphere_title,"image_url" : image_url}
+        hemisphere_dict = {"title": title,"image_url": image_url}
 
         # Construct list of hemisphere dictionaries  
         hemisphere_images.append(hemisphere_dict)

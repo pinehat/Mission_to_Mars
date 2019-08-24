@@ -10,7 +10,7 @@
 
 <body>
 
-    <div class="container">
+  <div class="container">
     <div class="jumbotron text-center">
       <h1><b>Mission to Mars</b></h1>
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
@@ -31,19 +31,19 @@
 
     <div class="row">
 
-        <div class="col-md-9">
+        <div class="col-md-8">
         <h2><b>Featured Mars Image</b></h2>
-          <img src="{{mars_data.featured_image_url}}" class="img-responsive">
+          <img src="{{mars_data.featured_image_url}}" alt="featured Mars image" class="img-responsive" width='100%'>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-4">
 
         <div class="row">
           <div class="col-md-12">
-              <div class="panel panel-default">
-                  <div class="panel-body">
-                      <h4><b>Current Weather on Mars</b></h4>
-                      <p>{{mars_data.mars_tweet}}</p>
+              <div class="card mb-4">
+                  <div class="card-body">
+                      <h3 class="card-title">Current Weather on Mars</h3>
+                      <p class="card-text">{{mars_data.mars_tweet}}</p>
                   </div>
               </div>
           </div>
@@ -57,25 +57,26 @@
         </div>
       </div>
     </div>
-    
+
+    <div class="page-header mt-4">
+      <h2 class="text-center"><b>Mars Hemispheres</b></h2>
+    </div>
 
     <div class="row" style="margin-top:80px;">
-      <div class="page-header">
-        <h2 class="text-center"><b>Mars Hemispheres</b></h2>
-      </div>
-
-      {% for hemisphere in mars_data.hemispheres %}
+        {% for hemisphere in mars_data.hemispheres %}
         <div class="col-md-6">
             <div class="thumbnail">
-            <img src="{{hemisphere.img_url}}">
+            <img src="{{hemisphere.image_url}}" alt = "Mars image" width="100%">
             <div class="caption">
                 <h3><b>{{hemisphere.title}}</b></h3>
             </div>
             </div>
         </div>
-      {% endfor %}
-
+        {% endfor %}
+      </div>
     </div>
+
+
   </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

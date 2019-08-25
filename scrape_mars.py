@@ -1,14 +1,20 @@
-# Import dependencies
+# This code is imported by app.py. App.py calls the scrape function here to scrape Mars data from 
+# various websites and return in the dictionary.
+
+# Import dependencies.
 import pandas as pd
 from pprint import pprint
 import time
 from splinter import Browser
+from selenium import webdriver
 from bs4 import BeautifulSoup
 import pymongo
-from selenium import webdriver
 
+# Initial dictionary to be populated in scrape function
 mars_dict = {}
 
+# Scrape function calls other functions below that use browser to 
+# collect Mars information from various websites.
 def scrape():
 
     browser = Browser("chrome", executable_path="chromedriver", headless=True)
@@ -63,7 +69,6 @@ def get_featured_image_url(browser):
     time.sleep(2)
 
     # Find and click more info button
-    #browser.is_element_present_by_text('more info',wait_time=1)
     more_info_button = browser.find_link_by_partial_text('more info')
     more_info_button.click()
     time.sleep(2)
@@ -100,11 +105,10 @@ def get_mars_facts():
     url = 'https://space-facts.com/mars/'
     earth_mars_facts = pd.read_html(url)
     mars_facts_df = earth_mars_facts[1]
-    mars_facts_df.columns = ['Mars Statistic','Value']
-    mars_facts_df.set_index('Mars Statistic', inplace=True)
+    mars_facts_df.columns = ['Mars Attribute','Value']
+    mars_facts_df.set_index('Mars Attribute', inplace=True)
     mars_facts_df
     
-    #return mars_facts_df.to_html(classes="table table-striped")
     return mars_facts_df.to_html()
 
 
@@ -145,8 +149,7 @@ def get_hemispheres(browser):
 
         pprint(hemisphere_images)
     
-        # Click Back button
-        #browser.click_link_by_partial_text('Back')
+        # take browser back
         browser.back()
 
     return hemisphere_images
